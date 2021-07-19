@@ -25,6 +25,13 @@ The calculations requested in the assignment instructions are then supplied by t
 
 Type hints are present in all relevant signatures and basic documentation is included in the code itself.
 
+## OOPS Concepts included in this project
+
+This project source code is sutable for forming part of the object module of production application
+It includes the bellow OOPS Concepts.
+
+- Class : This project has Class like Trade,
+
 ## Tests
 
 A moderately extensive suite of tests is included in `tests/`. The autodiscovery feature of `unittest` makes it fairly convenient to run them by executing the following command:
