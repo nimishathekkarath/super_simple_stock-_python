@@ -1,3 +1,7 @@
+"""
+File:  super_simple_stockes.py
+Created By:  Nimisha Thekkarath(nimisha0092@gmail.com)
+"""
 import enum
 import abc
 import operator
