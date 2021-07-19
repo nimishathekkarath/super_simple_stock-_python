@@ -1,7 +1,7 @@
 import unittest
 from datetime import timedelta
 
-from super_simple_stocks import StockSymbol, Stock
+from super_simple_stocks import TickerSymbol, Stock
 from .factories import StockFactory, TradeFactory
 
 
@@ -10,7 +10,7 @@ class StockInitTestCase(unittest.TestCase):
     def test_not_instantiable(self):
 
         with self.assertRaises(TypeError):
-            stock = Stock(stock_symbol=StockSymbol.ALE,
+            stock = Stock(ticker_symbol=TickerSymbol.ALE,
                           par_value=100.0)
 
 
@@ -33,33 +33,33 @@ class StockRecordTradeTestCase(unittest.TestCase):
 
         self.assertIn(trade, self.stock.trades)
 
-    def test_checks_stock_symbol(self):
-        ale_stock = StockFactory.get_stock_by_stock_symbol(StockSymbol.ALE)
-        tea_trade = TradeFactory.get_trade_for_stock(StockSymbol.TEA)
+    def test_checks_ticker_symbol(self):
+        ale_stock = StockFactory.get_stock_by_ticker_symbol(TickerSymbol.ALE)
+        tea_trade = TradeFactory.get_trade_for_stock(TickerSymbol.TEA)
         with self.assertRaises(ValueError):
             ale_stock.record_trade(tea_trade)
 
 
-class StockStockPriceTestCase(unittest.TestCase):
+class StockTickerPriceTestCase(unittest.TestCase):
 
     def setUp(self):
         self.stock = StockFactory.get_stock()
 
     def test_empty_trades_raises_attribute_error(self):
         with self.assertRaises(AttributeError):
-            stock_price = self.stock.stock_price
+            ticker_price = self.stock.ticker_price
 
     def test_price_value(self):
         trade = TradeFactory.get_trade()
         self.stock.record_trade(trade)
-        self.assertEqual(trade.price_per_share, self.stock.stock_price)
+        self.assertEqual(trade.price_per_share, self.stock.ticker_price)
 
     def test_price_value_is_last_trades(self):
         trades = TradeFactory.get_trades(3)
         last_trade = trades[-1]
         for trade in trades:
             self.stock.record_trade(trade)
-        self.assertEqual(last_trade.price_per_share, self.stock.stock_price)
+        self.assertEqual(last_trade.price_per_share, self.stock.ticker_price)
 
 
 class StockPriceEarningsRatioTestCase(unittest.TestCase):
@@ -93,7 +93,7 @@ class StockPriceTestCase(unittest.TestCase):
         self.assertEqual(self.stock.price(current_time), expected_value)
 
     def test_price_value_for_multiple_trades(self):
-        trades = TradeFactory.get_trades_for_stock(StockSymbol.TEA)
+        trades = TradeFactory.get_trades_for_stock(TickerSymbol.TEA)
         for trade in trades:
             self.stock.record_trade(trade)
 

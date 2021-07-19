@@ -15,7 +15,7 @@ class TradeInitTestCase(unittest.TestCase):
                               timestamp=self.trade.timestamp,
                               quantity=0,
                               price_per_share=self.trade.price_per_share,
-                              buyorsell=self.trade.buyorsell)
+                              buy_sell_indicator=self.trade.buy_sell_indicator)
 
     def test_raises_value_error_on_negative_price_per_share(self):
         with self.assertRaises(ValueError):
@@ -23,7 +23,7 @@ class TradeInitTestCase(unittest.TestCase):
                               timestamp=self.trade.timestamp,
                               quantity=self.trade.quantity,
                               price_per_share=-25.0,
-                              buyorsell=self.trade.buyorsell)
+                              buy_sell_indicator=self.trade.buy_sell_indicator)
 
 
 class TradeTotalPriceTestCase(unittest.TestCase):

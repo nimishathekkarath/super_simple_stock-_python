@@ -1,17 +1,17 @@
 from datetime import datetime
 
-from super_simple_stocks import (StockSymbol,
+from super_simple_stocks import (TickerSymbol,
                                  Trade,
                                  Stock,
                                  CommonStock,
                                  PreferredStock)
-from .sample_data import STOCKS, TRADES
+from .fixture_data import STOCKS, TRADES
 
 
 class TradeFactory:
 
     @staticmethod
-    def get_trades(n: int=len(TRADES)-1) -> list[Trade]:
+    def get_trades(n: int=len(TRADES)-1) -> [Trade]:
 
         trades = []
         for trade_data in TRADES[0:n+1]:
@@ -25,19 +25,19 @@ class TradeFactory:
         return next(iter(TradeFactory.get_trades(1)))
 
     @staticmethod
-    def get_trades_for_stock(stock_symbol: StockSymbol,
+    def get_trades_for_stock(ticker_symbol: TickerSymbol,
                              n: int=len(TRADES)-1):
         return [trade for trade in TradeFactory.get_trades()
-                if trade.stock_symbol is stock_symbol][:n+1]
+                if trade.ticker_symbol is ticker_symbol][:n+1]
 
     @staticmethod
-    def get_trade_for_stock(stock_symbol: StockSymbol):
-        return next(iter(TradeFactory.get_trades_for_stock(stock_symbol)))
+    def get_trade_for_stock(ticker_symbol: TickerSymbol):
+        return next(iter(TradeFactory.get_trades_for_stock(ticker_symbol)))
 
     @staticmethod
     def from_tuple(trade_data: tuple) -> Trade:
         datetime_str_format = '%Y-%m-%dT%H:%M:%S'
-        return Trade(stock_symbol=trade_data[0],
+        return Trade(ticker_symbol=trade_data[0],
                      timestamp=datetime.strptime(trade_data[1],
                                                  datetime_str_format),
                      quantity=trade_data[2],
@@ -48,12 +48,12 @@ class TradeFactory:
 class StockFactory:
 
     @staticmethod
-    def get_stocks(n: int=len(STOCKS)-1) -> list[Stock]:
+    def get_stocks(n: int=len(STOCKS)-1) -> [Stock]:
 
         stocks = []
         for stock_data in STOCKS[0:n+1]:
 
-            stock_symbol = StockSymbol(stock_data[0])
+            ticker_symbol = TickerSymbol(stock_data[0])
             par_value = stock_data[4]
             cls = stock_data[1]
 
@@ -64,7 +64,7 @@ class StockFactory:
             else:
                 raise ValueError()
 
-            stock = cls(stock_symbol,
+            stock = cls(ticker_symbol,
                         par_value,
                         dividend)
             stocks.append(stock)
@@ -76,9 +76,9 @@ class StockFactory:
         return next(iter(StockFactory.get_stocks(1)))
 
     @staticmethod
-    def get_stock_by_stock_symbol(stock_symbol: StockSymbol):
+    def get_stock_by_ticker_symbol(ticker_symbol: TickerSymbol):
         return next(stock for stock in StockFactory.get_stocks()
-                    if stock.stock_symbol is stock_symbol)
+                    if stock.ticker_symbol is ticker_symbol)
 
     @staticmethod
     def get_zero_dividend_stock() -> Stock:
@@ -94,3 +94,7 @@ class StockFactory:
     def get_preferred_stock() -> PreferredStock:
         return next(stock for stock in StockFactory.get_stocks()
                     if isinstance(stock, PreferredStock))
+
+
+
+
