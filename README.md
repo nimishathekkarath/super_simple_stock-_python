@@ -27,7 +27,7 @@ Type hints are present in all relevant signatures and basic documentation is inc
 
 ## OOPS Concepts included in this project
 
-This project source code is sutable for forming part of the object module of production application
+This project source code is suitable for forming part of the object module of production application
 It includes the bellow OOPS Concepts.
 
 - Class : This project has Class like Trade,Stock,CommonStock,PreferredStock and GlobalBeverageCorporationExchange. Here Stock is an abstract class for CommonStock and PreferredStock, Stock servers as a super class for these two classes.
