@@ -1,1 +1,1 @@
-# super_simple_stock-_python
+# super_simple_stock
