@@ -33,11 +33,11 @@ It includes the bellow OOPS Concepts.
 - Class : This project has Class like Trade,Stock,CommonStock,PreferredStock and GlobalBeverageCorporationExchange. Here Stock is an abstract class for CommonStock and PreferredStock, Stock servers as a super class for these two classes.
 - Inheritance: Stock class servers as a super class for CommonStock and PreferredStock classes.
 - Data Encapsulation: @property is an inbuilt-python decorator and its mainly used to increase data encapsulation.
-- The code is make use of the other OOPS concepts like 
-   -Method
-   -Object
-   -Data abstraction
-   -Polimorphism
+- The code is making use of the other OOPS concepts like 
+   - Method
+   - Object
+   - Data abstraction
+   - Polimorphism
  - I have included `loggers` and `exception handling`  also.
 
 
