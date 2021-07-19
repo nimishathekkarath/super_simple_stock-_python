@@ -272,28 +272,7 @@ class GlobalBeverageCorporationExchange:
             geometricmean=product**(1/n)
             return geometricmean
             
-    def volum_weighted_stock_price(self,
-                        current_time: datetime=datetime.now()) -> float:
-        """
-        :param current_time: The point of time for which we want to obtain the index.
-        :return: The volum weighted stock price of all stock prices. Returns None if any of them is
-            None.
-        """
-         
-        logger.info("Finding The VWSP of all stock prices")
-        n = len(self.stocks)
-        if n==0:
-            logger.error("quantity of the share should be positive")
-
-        stock_prices = [stock.price(current_time) for stock in self.stocks]
-
-        if None in stock_prices:
-            return None
-        else:
-            total_sum = sum(stock_prices)
-            vwsp= total_sum/n
-            return vwsp        
-
+    
    
 
 
