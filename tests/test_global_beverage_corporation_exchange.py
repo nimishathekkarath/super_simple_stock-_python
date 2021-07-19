@@ -1,6 +1,6 @@
 import unittest
 
-from super_simple_stocks import GlobalBeverageCorporationExchange, StockSymbol
+from super_simple_stocks import GlobalBeverageCorporationExchange, TickerSymbol
 from .factories import StockFactory, TradeFactory
 
 
@@ -21,12 +21,12 @@ class GlobalBeverageCorporationExchangeRecordAllShareIndexTestCase(unittest.Test
 
     def test_index_value(self):
 
-        tea_stock = StockFactory.get_stock_by_stock_symbol(StockSymbol.TEA)
-        gin_stock = StockFactory.get_stock_by_stock_symbol(StockSymbol.GIN)
+        tea_stock = StockFactory.get_stock_by_ticker_symbol(TickerSymbol.TEA)
+        gin_stock = StockFactory.get_stock_by_ticker_symbol(TickerSymbol.GIN)
         gbce = GlobalBeverageCorporationExchange([tea_stock, gin_stock])
 
-        tea_stock_trades = TradeFactory.get_trades_for_stock(StockSymbol.TEA)
-        gin_stock_trades = TradeFactory.get_trades_for_stock(StockSymbol.GIN)
+        tea_stock_trades = TradeFactory.get_trades_for_stock(TickerSymbol.TEA)
+        gin_stock_trades = TradeFactory.get_trades_for_stock(TickerSymbol.GIN)
 
         for trade in tea_stock_trades + gin_stock_trades:
             gbce.record_trade(trade)
@@ -45,3 +45,8 @@ class GlobalBeverageCorporationExchangeRecordAllShareIndexTestCase(unittest.Test
         expected_value = (tea_stock_price * gin_stock_price)**(1/2)
 
         self.assertEqual(gbce.geometric_mean(current_time), expected_value)
+
+
+
+
+
